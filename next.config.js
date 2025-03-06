@@ -10,6 +10,7 @@
 const nextConfig = {
   output: 'standalone',
   reactStrictMode: true,
+  basePath: "/resume_ai",
   swcMinify: true,
   images: {
     domains: ['rb.gy'],
