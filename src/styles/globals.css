@@ -2,26 +2,207 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: 0 0% 7%;  /* Netflix dark background */
+    --foreground: 0 0% 95%; /* Light text on dark background */
+
+    --card: 0 0% 10%;
+    --card-foreground: 0 0% 95%;
+
+    --popover: 0 0% 10%;
+    --popover-foreground: 0 0% 95%;
+
+    --primary: 357 92% 47%; /* Netflix red */
+    --primary-foreground: 0 0% 95%;
+
+    --secondary: 0 0% 15%;
+    --secondary-foreground: 0 0% 95%;
+
+    --muted: 0 0% 15%;
+    --muted-foreground: 0 0% 65%;
+
+    --accent: 0 0% 15%;
+    --accent-foreground: 0 0% 95%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 95%;
+
+    --border: 0 0% 20%;
+    --input: 0 0% 20%;
+    --ring: 357 92% 47%;
+
+    --radius: 0.3rem;
   }
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
+@layer components {
+  .netflix-gradient {
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.3) 60%, rgba(0, 0, 0, 0.3) 70%, rgba(0, 0, 0, 0.9) 100%);
   }
+  
+  .netflix-card {
+    @apply bg-netflix-dark border-none rounded shadow-netflix transition-transform duration-300 hover:scale-105;
+  }
+  
+  .netflix-button {
+    @apply bg-netflix-red text-white rounded px-4 py-2 font-bold transition-all duration-200 hover:bg-opacity-80;
+  }
+  
+  .netflix-input {
+    @apply bg-[#333] text-white rounded p-4 border-none focus:outline-none focus:ring-2 focus:ring-netflix-red;
+  }
+}
+
+/* Netflix style scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #141414;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #E50914;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #ff0a16;
+}
+
+/* Animations */
+.netflix-fade-in {
+  animation: fadeIn 1.2s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.netflix-scale-in {
+  animation: scaleIn 0.5s ease-in-out;
+}
+
+@keyframes scaleIn {
+  from { transform: scale(0.95); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+.animate-fade-in {
+  animation: fadeIn 1s ease-in-out forwards;
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 1s ease-out forwards;
+}
+
+@keyframes fadeInUp {
+  from { 
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to { 
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.text-shadow {
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.scale-102:hover {
+  transform: scale(1.02);
+}
+
+.audio-wave {
+  animation: wave 1s ease-in-out infinite;
+}
+
+@keyframes wave {
+  0%, 100% { transform: scaleY(1); }
+  50% { transform: scaleY(1.5); }
+}
+
+/* Glass morphism effects */
+.glass-panel {
+  background: rgba(20, 20, 20, 0.7);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+}
+
+/* Modern gradient backgrounds */
+.bg-netflix-gradient {
+  background: linear-gradient(135deg, #141414 0%, #2d1b22 50%, #141414 100%);
+}
+
+.bg-netflix-card-gradient {
+  background: linear-gradient(180deg, rgba(40, 40, 40, 0.8) 0%, rgba(20, 20, 20, 0.8) 100%);
+}
+
+.bg-netflix-button-gradient {
+  background: linear-gradient(90deg, #E50914 0%, #ff4d4d 100%);
+}
+
+.bg-netflix-button-gradient:hover {
+  background: linear-gradient(90deg, #ff4d4d 0%, #E50914 100%);
+}
+
+/* Enhanced text with gradients */
+.text-gradient {
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  background-image: linear-gradient(90deg, #ffffff 0%, #E50914 100%);
+}
+
+/* Enhanced shadows */
+.shadow-netflix-glow {
+  box-shadow: 0 5px 15px rgba(229, 9, 20, 0.2);
+}
+
+.shadow-netflix-float {
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  transition: all 0.3s ease;
+}
+
+.shadow-netflix-float:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+}
+
+/* Transition effects */
+.transition-netflix {
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Helper classes for new design */
+.max-h-content {
+  max-height: 1000px;
+  transition: max-height 0.5s ease;
+}
+
+.max-h-0 {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s ease;
+}
+
+.rotate-180 {
+  transform: rotate(180deg);
+  transition: transform 0.3s ease;
 }
