@@ -261,14 +261,17 @@ export default async function handler(req: Request) {
         sassyConfig.voice = voiceId;
       }
 
+    //   agent_id, name, resumeText, agentConfig
+
       // Create agent in Bland AI
       const agentId = await createWebAgent(sassyConfig);
 
       // Call the Serverless Function to save the agent to MongoDB
-      const dbResponse = await fetch('http://your-app.com/api/db-handler', {
+      const dbResponse = await fetch(`${appUrl}/api/db-handler`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
+          agent_id: agentId,
           name: sassyConfig.prompt.name,
           resumeText: "This is a sassy agent created for a non-resume file upload.",
           agentConfig: sassyConfig,
@@ -314,6 +317,7 @@ export default async function handler(req: Request) {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
+        agent_id: agentId,
         name,
         resumeText,
         agentConfig,
