@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { listAgents, saveAgent } from '../../../db';
+import { listAgents, saveAgent } from '../../../db/mongodb';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   switch (req.method) {

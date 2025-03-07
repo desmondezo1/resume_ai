@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { getAgent, deleteAgent } from '../../../db';
+import { getAgent, deleteAgent } from '../../../db/mongodb';
 import { deleteAgent as deleteBlandAgent } from '../../../lib/bland';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {

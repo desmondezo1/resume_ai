@@ -1,7 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { generateAgentConfig, generateErrorMessage, generateSassyAgentConfig } from '../../lib/openai';
 import { createWebAgent } from '../../lib/bland';
-import { saveAgent } from '../../db';
+import { saveAgent } from '../../db/mongodb';
 import { extractNameFromResume } from '../../lib/utils';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
