@@ -4,7 +4,7 @@
   "private": true,
   "homepage": "https://desmondezo1.github.io/resume_ai",
   "scripts": {
-     "predeploy": "npm run build",
+    "predeploy": "npm run build",
     "deploy": "gh-pages -d out",
     "dev": "next dev",
     "build": "next build",

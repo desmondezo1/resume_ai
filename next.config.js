@@ -10,10 +10,10 @@
 const nextConfig = {
   output: 'standalone',
   reactStrictMode: true,
-  basePath: "/resume_ai",
+  basePath: "",
   swcMinify: true,
   images: {
-    domains: ['rb.gy'],
+    domains: ['*'],
   },
   env: {
     NEXT_PUBLIC_APP_URL: process.env.VERCEL_URL
